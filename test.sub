@@ -1,0 +1,9 @@
+universe = parallel
+executable = openmpiscript
+log = test.log
+output = test.out
+error = test.err
+arguments = /home/hiroki-h/script/obj
+machine_count = 8
+request_cpus = 2
+queue
