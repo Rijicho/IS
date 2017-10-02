@@ -69,23 +69,35 @@ int printnums(int* nums, int myid, int npp, int prev){
 		if((i==0 && prev > nums[0]) || (i!=0 && nums[i-1] > nums[i])){
 			ret++;	
 		}
-		printf("P%d: [%d] %d\n",myid, i, nums[i]);
+		//printf("P%d: [%d] %d\n",myid, i, nums[i]);
 	}
 	return ret;
 }
 
 int main(int argc, char **argv){
 
-	int NPP = 370000;
-	int nums[NPP];
+	int finish = 0;
+
+	
+
+
+	int NPP = 1000;
+	
 
 	int myid, numproc;
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &numproc);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myid);
+
+	MPI_Wtime();
+	
 	
 	int i,j;
+	while(!finish){
+		
 	
+	int nums[NPP];
+
 	//配布  	
 	if(myid == 0){
 		srand((unsigned)time(NULL));
@@ -103,7 +115,8 @@ int main(int argc, char **argv){
 	}
 	MPI_Barrier(MPI_COMM_WORLD);
 	double t1 = MPI_Wtime();
-
+	
+	
 	//ソート
 	for(i=0; i<8; i++)
 		SortStep(myid, nums, NPP, i, numproc);	
@@ -113,7 +126,7 @@ int main(int argc, char **argv){
 	MPI_Barrier(MPI_COMM_WORLD);
 	double t2 = MPI_Wtime();
 	double time = t2 - t1;
-	
+	double max = 0;	
 
 	if(myid==0){
 		double times[numproc];
@@ -127,13 +140,20 @@ int main(int argc, char **argv){
 			Recv(i, &(times[i]), 1, i, MPI_DOUBLE);
 			err += printnums(nums,i,NPP, prev);
 		}
-
-		for(i=0; i<numproc; i++){printf("[%d] time: %lf\n", myid, times[i]);}
-		printf("error: %d\n",err);
 		
+		for(i=0; i<numproc; i++){
+			if(max<times[i]) max=times[i];
+		}
+		printf("N=%d: time=%lf\n",NPP*numproc,max);
+		//printf("N=%d error= %d time=%lf\n", NPP*numproc,err,max);
 	}else{
 		Send(0, nums, NPP, myid, MPI_INT);
 		Send(0, &time, 1, myid, MPI_DOUBLE);
+	}
+
+	if(max<=0.2f) NPP += 1000;
+	else finish = 1;
+
 	}
 	MPI_Finalize();
 	return 0;
