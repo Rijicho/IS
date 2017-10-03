@@ -2874,3 +2874,144 @@
 	   Gpus                 :                           0
 	   Memory (MB)          :       35        1     28928
 ...
+000 (9259.000.000) 10/03 12:30:36 Job submitted from host: <192.168.11.117:9618?addrs=192.168.11.117-9618+[--1]-9618&noUDP&sock=2590_6ac9_3>
+...
+014 (9259.000.004) 10/03 12:30:41 Node 4 executing on host: <192.168.11.104:9618?addrs=192.168.11.104-9618+[--1]-9618&noUDP&sock=2452_0456_3>
+...
+014 (9259.000.003) 10/03 12:30:41 Node 3 executing on host: <192.168.11.112:9618?addrs=192.168.11.112-9618+[--1]-9618&noUDP&sock=2459_d180_3>
+...
+014 (9259.000.001) 10/03 12:30:41 Node 1 executing on host: <192.168.11.112:9618?addrs=192.168.11.112-9618+[--1]-9618&noUDP&sock=2459_d180_3>
+...
+014 (9259.000.006) 10/03 12:30:41 Node 6 executing on host: <192.168.11.104:9618?addrs=192.168.11.104-9618+[--1]-9618&noUDP&sock=2452_0456_3>
+...
+014 (9259.000.000) 10/03 12:30:41 Node 0 executing on host: <192.168.11.103:9618?addrs=192.168.11.103-9618+[--1]-9618&noUDP&sock=2446_e6c4_3>
+...
+014 (9259.000.002) 10/03 12:30:41 Node 2 executing on host: <192.168.11.103:9618?addrs=192.168.11.103-9618+[--1]-9618&noUDP&sock=2446_e6c4_3>
+...
+014 (9259.000.005) 10/03 12:30:41 Node 5 executing on host: <192.168.11.113:9618?addrs=192.168.11.113-9618+[--1]-9618&noUDP&sock=2433_fc09_3>
+...
+014 (9259.000.007) 10/03 12:30:41 Node 7 executing on host: <192.168.11.113:9618?addrs=192.168.11.113-9618+[--1]-9618&noUDP&sock=2433_fc09_3>
+...
+001 (9259.000.000) 10/03 12:30:41 Job executing on host: MPI_job
+...
+015 (9259.000.000) 10/03 12:31:14 Node 0 terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:29, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:29, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Node
+	0  -  Run Bytes Received By Node
+	0  -  Total Bytes Sent By Node
+	0  -  Total Bytes Received By Node
+...
+005 (9259.000.000) 10/03 12:31:14 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:58, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:58, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 2        10
+	   Disk (KB)            :        3        3    762191
+	   Gpus                 :                           0
+	   Memory (MB)          :       35        1     28928
+...
+000 (9260.000.000) 10/03 12:31:56 Job submitted from host: <192.168.11.117:9618?addrs=192.168.11.117-9618+[--1]-9618&noUDP&sock=2590_6ac9_3>
+...
+014 (9260.000.001) 10/03 12:32:07 Node 1 executing on host: <192.168.11.110:9618?addrs=192.168.11.110-9618+[--1]-9618&noUDP&sock=2458_21e7_3>
+...
+014 (9260.000.003) 10/03 12:32:07 Node 3 executing on host: <192.168.11.110:9618?addrs=192.168.11.110-9618+[--1]-9618&noUDP&sock=2458_21e7_3>
+...
+014 (9260.000.002) 10/03 12:32:07 Node 2 executing on host: <192.168.11.101:9618?addrs=192.168.11.101-9618+[--1]-9618&noUDP&sock=2456_c2b7_3>
+...
+014 (9260.000.000) 10/03 12:32:07 Node 0 executing on host: <192.168.11.101:9618?addrs=192.168.11.101-9618+[--1]-9618&noUDP&sock=2456_c2b7_3>
+...
+014 (9260.000.005) 10/03 12:32:07 Node 5 executing on host: <192.168.11.102:9618?addrs=192.168.11.102-9618+[--1]-9618&noUDP&sock=2451_54be_3>
+...
+014 (9260.000.007) 10/03 12:32:07 Node 7 executing on host: <192.168.11.102:9618?addrs=192.168.11.102-9618+[--1]-9618&noUDP&sock=2451_54be_3>
+...
+014 (9260.000.006) 10/03 12:32:07 Node 6 executing on host: <192.168.11.111:9618?addrs=192.168.11.111-9618+[--1]-9618&noUDP&sock=2438_6a02_3>
+...
+014 (9260.000.004) 10/03 12:32:07 Node 4 executing on host: <192.168.11.111:9618?addrs=192.168.11.111-9618+[--1]-9618&noUDP&sock=2438_6a02_3>
+...
+001 (9260.000.000) 10/03 12:32:07 Job executing on host: MPI_job
+...
+015 (9260.000.000) 10/03 12:32:32 Node 0 terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:21, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:21, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Node
+	0  -  Run Bytes Received By Node
+	0  -  Total Bytes Sent By Node
+	0  -  Total Bytes Received By Node
+...
+005 (9260.000.000) 10/03 12:32:32 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:57, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:57, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 2        10
+	   Disk (KB)            :        3        3    761629
+	   Gpus                 :                           0
+	   Memory (MB)          :       35        1     28928
+...
+000 (9262.000.000) 10/03 12:32:51 Job submitted from host: <192.168.11.117:9618?addrs=192.168.11.117-9618+[--1]-9618&noUDP&sock=2590_6ac9_3>
+...
+014 (9262.000.002) 10/03 12:32:52 Node 2 executing on host: <192.168.11.101:9618?addrs=192.168.11.101-9618+[--1]-9618&noUDP&sock=2456_c2b7_3>
+...
+014 (9262.000.000) 10/03 12:32:52 Node 0 executing on host: <192.168.11.101:9618?addrs=192.168.11.101-9618+[--1]-9618&noUDP&sock=2456_c2b7_3>
+...
+014 (9262.000.003) 10/03 12:32:52 Node 3 executing on host: <192.168.11.110:9618?addrs=192.168.11.110-9618+[--1]-9618&noUDP&sock=2458_21e7_3>
+...
+014 (9262.000.001) 10/03 12:32:52 Node 1 executing on host: <192.168.11.110:9618?addrs=192.168.11.110-9618+[--1]-9618&noUDP&sock=2458_21e7_3>
+...
+014 (9262.000.004) 10/03 12:32:52 Node 4 executing on host: <192.168.11.102:9618?addrs=192.168.11.102-9618+[--1]-9618&noUDP&sock=2451_54be_3>
+...
+014 (9262.000.006) 10/03 12:32:52 Node 6 executing on host: <192.168.11.102:9618?addrs=192.168.11.102-9618+[--1]-9618&noUDP&sock=2451_54be_3>
+...
+014 (9262.000.007) 10/03 12:32:52 Node 7 executing on host: <192.168.11.111:9618?addrs=192.168.11.111-9618+[--1]-9618&noUDP&sock=2438_6a02_3>
+...
+014 (9262.000.005) 10/03 12:32:52 Node 5 executing on host: <192.168.11.111:9618?addrs=192.168.11.111-9618+[--1]-9618&noUDP&sock=2438_6a02_3>
+...
+001 (9262.000.000) 10/03 12:32:52 Job executing on host: MPI_job
+...
+015 (9262.000.000) 10/03 12:33:49 Node 0 terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:53, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:53, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Node
+	0  -  Run Bytes Received By Node
+	0  -  Total Bytes Sent By Node
+	0  -  Total Bytes Received By Node
+...
+005 (9262.000.000) 10/03 12:33:49 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:01:24, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:01:24, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 2        10
+	   Disk (KB)            :        3        3    761629
+	   Gpus                 :                           0
+	   Memory (MB)          :       35        1     28928
+...
