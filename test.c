@@ -136,8 +136,8 @@ int main(int argc, char **argv){
     		for(i=0; i<numproc; i++){
     			if(max<times[i]) max=times[i];
     		}
-    		printf("N=%d: time=%lf\n",NPP*numproc,max);
-    		//printf("N=%d error= %d time=%lf\n", NPP*numproc,err,max);
+    		//printf("N=%d: time=%lf\n",NPP*numproc,max);
+    		printf("N=%d error= %d time=%lf\n", NPP*numproc,err,max);
             for(i=1; i<numproc; i++)
                 Send(i, &max, 1, i, MPI_DOUBLE);
         }else{
