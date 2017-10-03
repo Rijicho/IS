@@ -138,12 +138,17 @@ int main(int argc, char **argv){
     		}
     		printf("N=%d: time=%lf\n",NPP*numproc,max);
     		//printf("N=%d error= %d time=%lf\n", NPP*numproc,err,max);
-    	}else{
+            for(i=1; i<numproc; i++)
+                Send(i, &max, 1, i, MPI_DOUBLE);
+        }else{
     		Send(0, nums, NPP, myid, MPI_INT);
     		Send(0, &time, 1, myid, MPI_DOUBLE);
+            Recv(0, &max, 1, myid, MPI_DOUBLE);
     	}
 
     	if(max<=0.2f){
+            if(max<0.15f)
+                NPP+=10000;
             if(max<0.195f)
                 NPP += 1000;
             else if(max<0.199f)
