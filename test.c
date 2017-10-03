@@ -143,7 +143,14 @@ int main(int argc, char **argv){
     		Send(0, &time, 1, myid, MPI_DOUBLE);
     	}
 
-    	if(max<=0.2f) NPP += 1000;
+    	if(max<=0.2f){
+            if(max<0.195f)
+                NPP += 1000;
+            else if(max<0.199f)
+                NPP += 100;
+            else
+                NPP += 10;
+        }
     	else finish = 1;
 
 	}
