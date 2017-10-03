@@ -149,7 +149,7 @@ int main(int argc, char **argv){
     	if(max<=0.2f){
             if(max<0.15f)
                 NPP+=10000;
-            if(max<0.195f)
+            else if(max<0.195f)
                 NPP += 1000;
             else if(max<0.199f)
                 NPP += 100;
