@@ -16,7 +16,7 @@ void printall(float u[])
     }
 }
 
-void init(float u[]){
+void init(float* u){
     for(int i=0; i<n; i++)
     {
         u[i]=0;
@@ -36,11 +36,14 @@ void init(float u[]){
 
 int main()
 {
+    int size = sizeof(float)*n*n;
     float r = 0.25f;
-    float u[n*n];
-    float u2[n*n];
+    float* u;
+    float* u2;
+    malloc(u,size);
+    malloc(u2,size);
     init(u);
-    memcpy(u2, u, sizeof(float)*n*n);
+    init(u2);
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
     for(int i=0; i<100; i++){
