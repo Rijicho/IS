@@ -35,7 +35,6 @@ void init(float* u){
 }
 __global__ void kernel(float* u2, float* u1, int N, int R)
 {
-	N=32; R=0.25f;
 	for(int i=0; i<100; i++){
 		if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1)
 		{
@@ -49,7 +48,7 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 
 int main()
 {
-    float r = 0.25f;
+    float r = 0.1f;
     float u1[n*n];
     float u2[n*n];
     init(u1);
