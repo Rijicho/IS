@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-int n = 32;
+int n = 1024;
 
 void printall(float u[])
 {
@@ -36,14 +36,10 @@ void init(float* u){
 }
 __global__ void kernel(float* u2, float* u1, int N, float R)
 {
-
 	int id = threadIdx.x;
 	for(int i=0; i<100; i++){
 		if(id/N!=0 && id/N!=N-1 && id%N!=0 && id%N!=N-1)
 		{
-			//u2[id] = id;
-			//u2[id] = u1[id]+1;
-			//u2[id] = (1-4*R)*u1[id];
 			u2[id] = (1-4*R)*u1[id] + R*(u1[id+N]+u1[id-N]+u1[id+1]+u1[id-1]);
 		}
 		__syncthreads();
