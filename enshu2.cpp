@@ -38,7 +38,7 @@ void init(float* u){
 int main()
 {
     int size = sizeof(float)*n*n;
-    float r = 0.25f;
+    float r = 0.1f;
     float* u = (float*)malloc(size);
     float* u2 = (float*)malloc(size);
     init(u);
