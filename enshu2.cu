@@ -3,6 +3,7 @@
 #include <string>
 #include <string.h>
 #include <sys/time.h>
+#include <stdio.h>
 
 int n = 32;
 
