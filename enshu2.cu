@@ -49,6 +49,7 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 {
 	for(int i=0; i<100; i++){
 		device_step(u2,u1, N, R);
+		__syncthreads();
 		device_copy(u2,u1, N);
 		__syncthreads();
 	}
