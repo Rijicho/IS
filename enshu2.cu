@@ -11,7 +11,7 @@ void printall(float u[])
 {
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            std::cout << std::setw(5) << (int)(u[i*n+j]*10);
+            std::cout << std::setw(12) << u[i*n+j]*10;
         }
         std::cout << std::endl << std::endl;
     }
