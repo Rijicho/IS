@@ -4,7 +4,7 @@
 #include <vector>
 #include <sys/time.h>
 
-int n = 100;
+int n = 1000;
 
 void printall(std::vector<std::vector<float> > u)
 {
@@ -22,7 +22,7 @@ int main()
 
 
     float r = 0.25f;
-    std::vector<std::vector<float> > u(100,std::vector<float>(100,1));
+    std::vector<std::vector<float> > u(n,std::vector<float>(n,1));
     for(int i=0; i<n; i++){
         u[0][i]=0;
         u[n-1][i]=0;
@@ -30,7 +30,7 @@ int main()
         u[i][n-1]=0;
     }
     std::vector<std::vector<float> > u2 = u;
-    printall(u);
+    //printall(u);
     gettimeofday(&t0,NULL);
     for(int i=0; i<100; i++){
         #pragma omp parallel for
@@ -44,7 +44,7 @@ int main()
     }
     gettimeofday(&t1,NULL);
     std::cout << "100steps later:" << std::endl;
-    printall(u);
+   // printall(u);
     std::cout << "100 steps, u:" << n << "x" << n << std::endl;
     std::cout << "time: " << (double)(t1.tv_sec - t0.tv_sec)+(double)(t1.tv_usec - t0.tv_usec)*1.0e-6 << std::endl;
 
