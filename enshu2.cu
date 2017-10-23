@@ -43,7 +43,12 @@ __device__ void device_step(float* u2, float* u1, int N, int R)
 
 __global__ void kernel(float* u2, float* u1, int N, int R)
 {
-	device_step(u2,u1, N, R);
+	int size = sizeof(float)*N*N;
+	for(int i=0; i<100; i++)
+	{
+		device_step(u2,u1, N, R);
+		cudaMemcpy(u1, u2, size, cudaMemcpyDeviceToDevice);
+	}
 }
 
 int main()
@@ -63,15 +68,13 @@ int main()
 
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-    for(int i=0; i<100; i++){
-        kernel<<<1,1024>>>(d_u2,d_u1,n,r);
-	cudaMemcpy(u2, d_u2, sizeof(float)*n*n, cudaMemcpyDeviceToHost);
-        memcpy(u1, u2, sizeof(float)*n*n);
-    }
+    kernel<<<1,1024>>>(d_u2,d_u1,n,r);
     gettimeofday(&t1,NULL);
+	cudaMemcpy(u2, d_u2, sizeof(float)*n*n, cudaMemcpyDeviceToHost);
 	cudaFree(d_u1);
 	cudaFree(d_u2);
-    std::cout << "100steps later:" << std::endl;
+
+	std::cout << "100steps later:" << std::endl;
     printall(u1);
     std::cout << "100 steps, u:" << n << "x" << n << std::endl;
     std::cout << "time: " << (double)(t1.tv_sec - t0.tv_sec)+(double)(t1.tv_usec - t0.tv_usec)*1.0e-6 << std::endl;
