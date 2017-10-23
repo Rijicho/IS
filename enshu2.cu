@@ -41,9 +41,17 @@ __device__ void device_step(float* u2, float* u1, int N, int R)
 	u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
 }
 
+__device__ void device_copy(float* u2, float* u1, int N)
+{
+	u1[threadIdx.x] = u2[threadIdx.x];
+}
+
 __global__ void kernel(float* u2, float* u1, int N, int R)
 {
-	device_step(u2,u1, N, R);
+	for(int i=0; i<100; i++){
+		device_step(u2,u1, N, R);
+		device_copy(u2,u1, N);
+	}
 }
 
 int main()
@@ -64,10 +72,7 @@ int main()
 
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-	for(int i=0; i< 100; i++){
-		kernel<<<1,1024>>>(d_u2,d_u1,n,r);
-		cudaMemcpy(d_u1, d_u2, size, cudaMemcpyDeviceToDevice);
-	}
+	kernel<<<1,1024>>>(d_u2,d_u1,n,r);
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u2, d_u2, size, cudaMemcpyDeviceToHost);
 	cudaFree(d_u1);
