@@ -71,6 +71,7 @@ int main()
 	cudaThreadSynchronize();
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u1, d_u1, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(u2, d_u2, size, cudaMemcpyDeviceToHost);
 
 
 	std::cout << "100steps later:" << std::endl;
