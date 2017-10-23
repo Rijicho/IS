@@ -69,12 +69,15 @@ int main()
 	cudaThreadSynchronize();
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u1, d_u1, size, cudaMemcpyDeviceToHost);
-	cudaFree(d_u1);
-	cudaFree(d_u2);
+
 
 	std::cout << "100steps later:" << std::endl;
     printall(u1);
+	printall(u2);
     std::cout << "100 steps, u:" << n << "x" << n << std::endl;
     std::cout << "time: " << (double)(t1.tv_sec - t0.tv_sec)+(double)(t1.tv_usec - t0.tv_usec)*1.0e-6 << std::endl;
+
+	cudaFree(d_u1);
+	cudaFree(d_u2);
 	return 0;
 }
