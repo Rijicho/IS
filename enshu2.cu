@@ -30,37 +30,16 @@ void init(float* u){
         for(int j=1; j<n-1; j++)
         {
 	    u[i*n+j]=1;
-	}
+		}
     }
 }
-/*
-__device__ void device_step(float* u2, float* u1, int N, int R)
-{
-	if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1)
-		u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
-}
-
-__device__ void device_copy(float* u2, float* u1, int N)
-{
-	u1[threadIdx.x] = u2[threadIdx.x];
-}
-*/
 __global__ void kernel(float* u2, float* u1, int N, int R)
 {
-	if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1){
-		u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
-	}
-	__syncthreads();
-	u1[threadIdx.x] = u2[threadIdx.x];
-	__syncthreads();
-	return;
-
+	N=32; R=0.25f;
 	for(int i=0; i<100; i++){
-		if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1){
+		if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1)
+		{
 			u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
-
-			//u1[threadIdx.x]++;
-			//u2[threadIdx.x]++;
 		}
 		__syncthreads();
 		u1[threadIdx.x] = u2[threadIdx.x];
