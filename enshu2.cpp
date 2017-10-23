@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 
-int n = 32;
+int n = 1024;
 
 void printall(float u[])
 {
