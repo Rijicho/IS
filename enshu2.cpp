@@ -3,6 +3,7 @@
 #include <string>
 #include <string.h>
 #include <sys/time.h>
+#include <stdlib.h>
 
 int n = 32;
 
@@ -38,10 +39,8 @@ int main()
 {
     int size = sizeof(float)*n*n;
     float r = 0.25f;
-    float* u;
-    float* u2;
-    malloc(u,size);
-    malloc(u2,size);
+    float* u = (float*)malloc(size);
+    float* u2 = (float*)malloc(size);
     init(u);
     init(u2);
     struct timeval t0, t1;
