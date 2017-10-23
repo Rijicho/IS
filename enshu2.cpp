@@ -11,7 +11,7 @@ void printall(float u[])
 {
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            std::cout << std::setw(2) << (int)(u[i*n+j]*10);
+            std::cout << std::setw(5) << (int)(u[i*n+j]*10);
         }
         std::cout << std::endl << std::endl;
     }
@@ -57,7 +57,7 @@ int main()
     }
     gettimeofday(&t1,NULL);
     std::cout << "100steps later:" << std::endl;
-    //printall(u);
+    printall(u);
     std::cout << "100 steps, u:" << n << "x" << n << std::endl;
     std::cout << "time: " << (double)(t1.tv_sec - t0.tv_sec)+(double)(t1.tv_usec - t0.tv_usec)*1.0e-6 << std::endl;
 
