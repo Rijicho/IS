@@ -36,7 +36,7 @@ void init(float* u){
 
 __device__ void device_step(float* u2, float* u1, int N, int R)
 {
-	if(0<threadIdx.x && threadIdx.x<N-1)
+	if(0<threadIdx.x && threadIdx.x<N*N-1)
 		u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
 }
 
