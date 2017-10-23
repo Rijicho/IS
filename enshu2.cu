@@ -54,6 +54,7 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 		u1[threadIdx.x] = u2[threadIdx.x];
 		__syncthreads();
 	}
+	u2[0]=5;
 }
 
 int main()
@@ -67,22 +68,15 @@ int main()
 
 	float* d_u1;
 	float* d_u2;
-	int d_n;
-	int d_r;
 	cudaMalloc((void**)&d_u1,size);
 	cudaMalloc((void**)&d_u2,size);
-	cudaMalloc((void*)&d_n,sizeof(int));
-	cudaMalloc((void*)&d_r,sizeof(int));
 	cudaMemcpy(d_u1, u1, size, cudaMemcpyHostToDevice);
 	cudaMemcpy(d_u2, u2, size, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_n, n, sizeof(int), cudaMemcpyHostToDevice);
-	cudaMemcpy(d_r, r, sizeof(int), cudaMemcpyHostToDevice);
-
 
 
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-	kernel<<<1,1024>>>(d_u2,d_u1,d_n,d_r,&debug);
+	kernel<<<1,1024>>>(d_u2,d_u1,n,r,&debug);
 	cudaThreadSynchronize();
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u1, d_u1, size, cudaMemcpyDeviceToHost);
