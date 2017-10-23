@@ -49,9 +49,9 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 {
 	for(int i=0; i<100; i++){
 		if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1){
-			u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
+			//u2[threadIdx.x] = (1-4*R)*u1[threadIdx.x] + R*(u1[threadIdx.x+N]+u1[threadIdx.x-N]+u1[threadIdx.x+1]+u1[threadIdx.x-1]);
 
-			u1[threadIdx.x]++;
+			//u1[threadIdx.x]++;
 			u2[threadIdx.x]++;
 		}
 		__syncthreads();
