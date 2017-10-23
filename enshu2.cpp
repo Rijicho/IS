@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/time.h>
 
-int n = 1024;
+int n = 32;
 
 void printall(float u[])
 {
@@ -16,7 +16,7 @@ void printall(float u[])
     }
 }
 
-void init(float* u){
+void init(float u[]){
     for(int i=0; i<n; i++)
     {
         u[i]=0;
@@ -41,7 +41,6 @@ int main()
     float u2[n*n];
     init(u);
     memcpy(u2, u, sizeof(float)*n*n);
-
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
     for(int i=0; i<100; i++){
@@ -52,7 +51,7 @@ int main()
                 u2[k*n+l] = (1-4*r)*u[k*n+l]+r*(u[(k+1)*n+l]+u[(k-1)*n+l]+u[k*n+l+1]+u[k*n+l-1]);
             }
         }
-        memcpy(u, u2, sizeof u2);
+        memcpy(u, u2, sizeof(float)*n*n);
     }
     gettimeofday(&t1,NULL);
     std::cout << "100steps later:" << std::endl;

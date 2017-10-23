@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/time.h>
 
-int n = 1024;
+int n = 32;
 
 void printall(float u[])
 {
@@ -38,11 +38,7 @@ __device__ void device_step(float* u2, float* u1)
 {
 	if(threadIdx==0 || threadIdx==n-1)
 		return;
-
-	for(int k=1; k<n-1; k++)
-	{
-		u2[k*n+threadIdx] = (1-4*r)*u1[k*n+threadIdx]+r*(u1[(k+1)*n+threadIdx]+u1[(k-1)*n+threadIdx]+u1[k*n+threadIdx+1]+u1[k*n+threadIdx-1]);
-	}
+	u2[threadIdx] = (1-4*r)*u1[threadIdx] + r*(u1[threadIdx+n]+u1[threadIdx-n]+u1[threadIdx+1]+u1[threadIdx-1]);
 }
 
 __global__ void kernel(float* u2, float* u1)
