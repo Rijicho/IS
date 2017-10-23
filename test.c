@@ -3,26 +3,30 @@
 #include <time.h>
 #include <stdlib.h>
 
+//qsort用比較器
 int comp(const void *a, const void *b)
 {
-    	return *(int*)a - *(int*)b;
+    return *(int*)a - *(int*)b;
 }
 
+//qsort用比較器（反転）
 int comp_rev(const void *a, const void *b)
 {
 	return *(int*)b - *(int*)a;
 }
 
+//MPI_Sendのエイリアス
 void Send(int id, void* data, int count, int tag, MPI_Datatype type)
 {
 	MPI_Send(data, count, type, id, tag, MPI_COMM_WORLD);
 }
-
+//MPI_Recvのエイリアス
 void Recv(int id, void* data, int count, int tag, MPI_Datatype type)
 {
 	MPI_Recv(data, count, type, id, tag, MPI_COMM_WORLD, NULL);
 }
 
+//配列の各要素を、大小で分別する（双単調マージに使用）
 void SwapForEach(int* big, int* small, int size){
 	int i, tmp;
 	for(i=0; i<size; i++){
@@ -35,6 +39,7 @@ void SwapForEach(int* big, int* small, int size){
 	}
 }
 
+//ブロック奇遇ソート（双単調マージ交換）の1step（step=0～7を順に実行）
 void SortStep(int myid, int* nums, int npp, int step, int numproc){
 	int r[npp];
 	if(step%2==0){
@@ -62,6 +67,7 @@ void SortStep(int myid, int* nums, int npp, int step, int numproc){
 	}
 }
 
+//ソートされた数値列の出力用（だった。出力を消してエラーチェックのみに流用）
 int printnums(int* nums, int myid, int npp, int prev){
 	int i;
 	int ret=0;
@@ -120,6 +126,7 @@ int main(int argc, char **argv){
     	double time = t2 - t1;
     	double max = 0;
 
+        //経過時間をプロセス0に送って最大値を計算、出力、送り返す
     	if(myid==0){
     		double times[numproc];
     		times[0] = time;
@@ -146,6 +153,7 @@ int main(int argc, char **argv){
             Recv(0, &max, 1, myid, MPI_DOUBLE);
     	}
 
+        //経過時間によって各プロセスが処理する数の増分を変更
     	if(max<=0.2f){
             if(max<0.15f)
                 NPP+=10000;
@@ -156,7 +164,7 @@ int main(int argc, char **argv){
             else
                 NPP += 10;
         }
-    	else finish = 1;
+    	else finish = 1; //0.2sを超えたら終了
 
 	}
 	MPI_Finalize();
