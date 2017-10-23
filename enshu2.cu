@@ -43,12 +43,7 @@ __device__ void device_step(float* u2, float* u1, int N, int R)
 
 __global__ void kernel(float* u2, float* u1, int N, int R)
 {
-	int size = sizeof(float)*N*N;
-	for(int i=0; i<100; i++)
-	{
-		device_step(u2,u1, N, R);
-		cudaMemcpy(u1, u2, size, cudaMemcpyDeviceToDevice);
-	}
+	device_step(u2,u1, N, R);
 }
 
 int main()
@@ -58,19 +53,23 @@ int main()
     float u2[n*n];
     init(u1);
     init(u2);
+	int size = sizeof(float)*n*n;
 
 	float* d_u1;
 	float* d_u2;
-	cudaMalloc((void**)&d_u1,sizeof(float)*n*n);
-	cudaMalloc((void**)&d_u2,sizeof(float)*n*n);
-	cudaMemcpy(d_u1, u1, sizeof(float)*n*n, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_u2, u2, sizeof(float)*n*n, cudaMemcpyHostToDevice);
+	cudaMalloc((void**)&d_u1,size);
+	cudaMalloc((void**)&d_u2,size);
+	cudaMemcpy(d_u1, u1, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_u2, u2, size, cudaMemcpyHostToDevice);
 
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-    kernel<<<1,1024>>>(d_u2,d_u1,n,r);
+	for(int i=0; i< 100; i++){
+		kernel<<<1,1024>>>(d_u2,d_u1,n,r);
+		cudaMemcpy(d_u1, d_u2, size, cudaMemcpyDeviceToDevice);
+	}
     gettimeofday(&t1,NULL);
-	cudaMemcpy(u2, d_u2, sizeof(float)*n*n, cudaMemcpyDeviceToHost);
+	cudaMemcpy(u2, d_u2, size, cudaMemcpyDeviceToHost);
 	cudaFree(d_u1);
 	cudaFree(d_u2);
 
