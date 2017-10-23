@@ -42,7 +42,8 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 		if(id/N!=0 && id/N!=N-1 && id%N!=0 && id%N!=N-1)
 		{
 			//u2[id] = id;
-			u2[id] = u1[id]+1;
+			//u2[id] = u1[id]+1;
+			u2[id] = (1-4*R)*u1[id];
 			//u2[id] = (1-4*R)*u1[id] + R*(u1[id+N]+u1[id-N]+u1[id+1]+u1[id-1]);
 		}
 		__syncthreads();
