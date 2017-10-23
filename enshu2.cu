@@ -34,7 +34,7 @@ void init(float* u){
 		}
     }
 }
-__global__ void kernel(float* u2, float* u1, int N, int R)
+__global__ void kernel(float* u2, float* u1, int N, float R)
 {
 
 	int id = threadIdx.x;
@@ -43,8 +43,8 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 		{
 			//u2[id] = id;
 			//u2[id] = u1[id]+1;
-			u2[id] = (1-4*R)*u1[id];
-			//u2[id] = (1-4*R)*u1[id] + R*(u1[id+N]+u1[id-N]+u1[id+1]+u1[id-1]);
+			//u2[id] = (1-4*R)*u1[id];
+			u2[id] = (1-4*R)*u1[id] + R*(u1[id+N]+u1[id-N]+u1[id+1]+u1[id-1]);
 		}
 		__syncthreads();
 		u1[id] = u2[id];
