@@ -3391,3 +3391,36 @@
 	   Gpus                 :                           0
 	   Memory (MB)          :       35        1     28928
 ...
+000 (13438.000.000) 10/23 14:07:19 Job submitted from host: <192.168.11.117:9618?addrs=192.168.11.117-9618+[--1]-9618&noUDP&sock=2566_f483_3>
+...
+014 (13438.000.000) 10/23 14:07:29 Node 0 executing on host: <192.168.11.101:9618?addrs=192.168.11.101-9618+[--1]-9618&noUDP&sock=2436_0ad2_3>
+...
+001 (13438.000.000) 10/23 14:07:29 Job executing on host: MPI_job
+...
+015 (13438.000.000) 10/23 14:07:29 Node 0 terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Node
+	0  -  Run Bytes Received By Node
+	0  -  Total Bytes Sent By Node
+	0  -  Total Bytes Received By Node
+...
+005 (13438.000.000) 10/23 14:07:29 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated
+	   Cpus                 :                 1        10
+	   Disk (KB)            :      750      750    699833
+	   Gpus                 :                 1         1
+	   Memory (MB)          :        1        1     28928
+...

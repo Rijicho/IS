@@ -1,0 +1,9 @@
+universe = parallel
+executable = /home/hiroki-h/script/enshu2
+log = enshu2.log
+output = enshu2.out
+error = enshu2.err
+machine_count = 1
+request_cpus = 1
+request_gpus = 1
+queue
