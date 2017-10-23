@@ -79,7 +79,7 @@ int main()
 
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-	kernel<<<1,1024>>>(d_u2,d_u1,n,r,&debug);
+	kernel<<<1,1024>>>(d_u2,d_u1,n,r);
 	cudaThreadSynchronize();
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u1, d_u1, size, cudaMemcpyDeviceToHost);
