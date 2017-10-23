@@ -45,7 +45,7 @@ __device__ void device_copy(float* u2, float* u1, int N)
 	u1[threadIdx.x] = u2[threadIdx.x];
 }
 */
-__global__ void kernel(float* u2, float* u1, int N, int R)
+__global__ void kernel(float* u2, float* u1, int N, int R, int* debug)
 {
 	for(int i=0; i<100; i++){
 		if(threadIdx.x/N!=0 && threadIdx.x/N!=N-1 && threadIdx.x%N!=0 && threadIdx.x%N!=N-1)
@@ -53,6 +53,7 @@ __global__ void kernel(float* u2, float* u1, int N, int R)
 		__syncthreads();
 		u1[threadIdx.x] = u2[threadIdx.x];
 		__syncthreads();
+		*debug++;
 	}
 }
 
@@ -72,9 +73,11 @@ int main()
 	cudaMemcpy(d_u1, u1, size, cudaMemcpyHostToDevice);
 	cudaMemcpy(d_u2, u2, size, cudaMemcpyHostToDevice);
 
+	int debug = 0;
+
     struct timeval t0, t1;
     gettimeofday(&t0,NULL);
-	kernel<<<1,1024>>>(d_u2,d_u1,n,r);
+	kernel<<<1,1024>>>(d_u2,d_u1,n,r,&debug);
 	cudaThreadSynchronize();
     gettimeofday(&t1,NULL);
 	cudaMemcpy(u1, d_u1, size, cudaMemcpyDeviceToHost);
@@ -85,6 +88,6 @@ int main()
     printall(u1);
     std::cout << "100 steps, u:" << n << "x" << n << std::endl;
     std::cout << "time: " << (double)(t1.tv_sec - t0.tv_sec)+(double)(t1.tv_usec - t0.tv_usec)*1.0e-6 << std::endl;
-
+	std::cout << "debug: " << debug << std::endl;
     return 0;
 }
