@@ -1,0 +1,9 @@
+universe = parallel
+executable = test.sh
+log = test.log
+output = test.out
+error = test.err
+machine_count = 1
+request_cpus = 1
+request_memory = 52GB
+queue
