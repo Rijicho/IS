@@ -55,17 +55,17 @@ double get_dtime(){
 }
 
 void run(){
+    printf("M,DGEMM,GEMM\n");
   double t1,t2;
   for(int size = 100; size<3000; size+=100)
   {
-      printf("size=%d\n",size);
       // c[1:M][1:N] = a[1:M][1:K] * b[1:K][1:N]
       double *a,*b,*c,*c2;
       int m=size, n=size, k=size;
-      a = (double*)malloc(sizeof(double)*M*K);
-      b = (double*)malloc(sizeof(double)*K*N);
-      c = (double*)malloc(sizeof(double)*M*N);
-      c2 =(double*)malloc(sizeof(double)*M*N);
+      a = (double*)malloc(sizeof(double)*size*size);
+      b = (double*)malloc(sizeof(double)*size*size);
+      c = (double*)malloc(sizeof(double)*size*size);
+      c2 =(double*)malloc(sizeof(double)*size*size);
 
       for(int i=0; i<m; i++){
         for(int j=0; j<k; j++){
@@ -89,13 +89,15 @@ void run(){
       dgemm("N","N", &m,&n,&k, &alpha,a,&m, b,&k, &zero,c,&m);
       t2 = get_dtime();
 
-      printf("DGEMM-elapsed: %.10e\n", t2-t1);
+      double tdgemm = t2-t1;
 
       t1 = get_dtime();
       gemm(m,n,k,a,b,c2);
       t2 = get_dtime();
 
-      printf("GEMM-elapsed: %.10e\n", t2-t1);
+      double tgemm = t2-t1;
+
+      printf("%d,%.10e,%.10e\n", size, tdgemm, tgemm);
 
 
       free(c2);
