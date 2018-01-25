@@ -54,63 +54,55 @@ double get_dtime(){
   return (double)tv.tv_sec + (double)(tv.tv_usec)*0.001*0.001;
 }
 
-
-
 void run(){
   double t1,t2;
+  for(int size = 100; size<3000; size+=100)
+  {
+      printf("size=%d\n",size);
+      // c[1:M][1:N] = a[1:M][1:K] * b[1:K][1:N]
+      double *a,*b,*c,*c2;
+      int m=size, n=size, k=size;
+      a = (double*)malloc(sizeof(double)*M*K);
+      b = (double*)malloc(sizeof(double)*K*N);
+      c = (double*)malloc(sizeof(double)*M*N);
+      c2 =(double*)malloc(sizeof(double)*M*N);
 
-  // c[1:M][1:N] = a[1:M][1:K] * b[1:K][1:N]
-  double *a,*b,*c,*c2;
-  int m=M, n=N, k=K;
-  a = (double*)malloc(sizeof(double)*M*K);
-  b = (double*)malloc(sizeof(double)*K*N);
-  c = (double*)malloc(sizeof(double)*M*N);
-  c2 =(double*)malloc(sizeof(double)*M*N);
+      for(int i=0; i<m; i++){
+        for(int j=0; j<k; j++){
+          IDX(a, m, i, j) = uniform();
+        }
+      }
+      for(int i=0; i<k; i++){
+        for(int j=0; j<n; j++){
+          IDX(b, k, i, j) = uniform();
+        }
+      }
 
-  for(int i=0; i<m; i++){
-    for(int j=0; j<k; j++){
-      IDX(a, m, i, j) = uniform();
-    }
+      double alpha=1.0, zero=0.0;
+
+      //printf("matrix A:\n");
+      //print_matrix(a, m, k);
+      //printf("matrix B:\n");
+      //print_matrix(b, k, n);
+
+      t1 = get_dtime();
+      dgemm("N","N", &m,&n,&k, &alpha,a,&m, b,&k, &zero,c,&m);
+      t2 = get_dtime();
+
+      printf("DGEMM-elapsed: %.10e\n", t2-t1);
+
+      t1 = get_dtime();
+      gemm(m,n,k,a,b,c2);
+      t2 = get_dtime();
+
+      printf("GEMM-elapsed: %.10e\n", t2-t1);
+
+
+      free(c2);
+      free(c);
+      free(b);
+      free(a);
   }
-  for(int i=0; i<k; i++){
-    for(int j=0; j<n; j++){
-      IDX(b, k, i, j) = uniform();
-    }
-  }
-
-  double alpha=1.0, zero=0.0;
-
-  printf("matrix A:\n");
-  //print_matrix(a, m, k);
-  printf("matrix B:\n");
-  //print_matrix(b, k, n);
-
-  t1 = get_dtime();
-  dgemm("N","N", &m,&n,&k, &alpha,a,&m, b,&k, &zero,c,&m);
-  t2 = get_dtime();
-
-  printf("matrix C:\n");
-  //print_matrix(c, m, n);
-
-  printf("DGEMM-elapsed: %.10e\n", t2-t1);
-
-  t1 = get_dtime();
-  gemm(M,N,K,a,b,c2);
-  t2 = get_dtime();
-
-  printf("matrix C:\n");
-  //print_matrix(c2, m, n);
-  printf("GEMM-elapsed: %.10e\n", t2-t1);
-
-
-  free(c2);
-  free(c);
-  free(b);
-  free(a);
-
-
-
-
 }
 
 int main(){
