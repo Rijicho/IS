@@ -4,6 +4,7 @@
 #include <math.h>
 #include <sys/time.h>
 #include "mkl.h"
+#include <omp.h>
 
 #define M 3000
 #define N 4000
@@ -22,6 +23,20 @@ void gemm(int m, int n, int k, double* A, double* B, double* C)
 {
     for(int i=0; i<m; i++){
         for(int j=0; j<n; j++){
+            for(int a=0; a<k; a++){
+                IDX(C,m,i,j) += IDX(A,m,i,a) * IDX(B,k,a,j);
+            }
+        }
+    }
+}
+
+void gemm2(int m, int n, int k, double* A, double* B, double* C)
+{
+    #pragma omp parallel for
+    for(int i=0; i<m; i++){
+        #pragma omp parallel for
+        for(int j=0; j<n; j++){
+            #pragma omp parallel for
             for(int a=0; a<k; a++){
                 IDX(C,m,i,j) += IDX(A,m,i,a) * IDX(B,k,a,j);
             }
@@ -55,7 +70,7 @@ double get_dtime(){
 }
 
 void run(){
-    printf("M,DGEMM,GEMM\n");
+    printf("M,DGEMM,GEMM1,GEMM2\n");
   double t1,t2;
   for(int size = 100; size<3000; size+=100)
   {
@@ -97,7 +112,13 @@ void run(){
 
       double tgemm = t2-t1;
 
-      printf("%d,%.10e,%.10e\n", size, tdgemm, tgemm);
+      t1 = get_dtime();
+      gemm2(m,n,k,a,b,c2);
+      t2 = get_dtime();
+
+      double tgemm2 = t2-t1;
+
+      printf("%d,%.10e,%.10e, %.10e\n", size, tdgemm, tgemm, tgemm2);
 
 
       free(c2);
