@@ -17,6 +17,19 @@
 #define IDX(mat,n, i,j) (mat)[(i)+(j)*(n)]
 //-------------------------//
 
+//C=AB  A:m*k B:k*n C:m*n
+void gemm(int m, int n, int k, double* A, double* B, double* C)
+{
+    for(int i=0; i<m; i++){
+        for(int j=0; j<n; j++){
+            for(int a=0; a<k; a++){
+                IDX(C,m,i,j) += IDX(A,m,i,a) * IDX(B,k,a,j);
+            }
+        }
+    }
+}
+
+
 void print_matrix(double *a, int m, int n){
   for(int i=0; i<m; i++){
     for(int j=0; j<n; j++){
@@ -41,15 +54,18 @@ double get_dtime(){
   return (double)tv.tv_sec + (double)(tv.tv_usec)*0.001*0.001;
 }
 
+
+
 void run(){
   double t1,t2;
 
   // c[1:M][1:N] = a[1:M][1:K] * b[1:K][1:N]
-  double *a,*b,*c;
+  double *a,*b,*c,*c2;
   int m=M, n=N, k=K;
   a = (double*)malloc(sizeof(double)*M*K);
   b = (double*)malloc(sizeof(double)*K*N);
   c = (double*)malloc(sizeof(double)*M*N);
+  c2 =(double*)malloc(sizeof(double)*M*N);
 
   for(int i=0; i<m; i++){
     for(int j=0; j<k; j++){
@@ -78,9 +94,23 @@ void run(){
 
   printf("DGEMM-elapsed: %.10e\n", t2-t1);
 
+  t1 = get_dtime();
+  gemm(M,N,K,a,b,c2);
+  t2 = get_dtime();
+
+  printf("matrix C:\n");
+  print_matrix(c2, m, n);
+  printf("GEMM-elapsed: %.10e\n", t2-t1);
+
+
+  free(c2);
   free(c);
   free(b);
   free(a);
+
+
+
+
 }
 
 int main(){
