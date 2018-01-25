@@ -34,9 +34,7 @@ void gemm2(int m, int n, int k, double* A, double* B, double* C)
 {
     #pragma omp parallel for
     for(int i=0; i<m; i++){
-        #pragma omp parallel for
         for(int j=0; j<n; j++){
-            #pragma omp parallel for
             for(int a=0; a<k; a++){
                 IDX(C,m,i,j) += IDX(A,m,i,a) * IDX(B,k,a,j);
             }
@@ -72,7 +70,7 @@ double get_dtime(){
 void run(){
     printf("M,DGEMM,GEMM1,GEMM2\n");
   double t1,t2;
-  for(int size = 100; size<3000; size+=100)
+  for(int size = 100; size<=4000; size+=100)
   {
       // c[1:M][1:N] = a[1:M][1:K] * b[1:K][1:N]
       double *a,*b,*c,*c2;

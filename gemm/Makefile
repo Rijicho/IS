@@ -6,7 +6,7 @@ MKLINCLUDE=$(MKLROOT)/include
 PROGRAM = main
 OBJ     = main.o
 CC      = icc
-CFLAGS  = -Wall -O3 -std=c99
+CFLAGS  = -Wall -O3 -std=c99 -qopenmp
 HDR_DIR = -I$(MKLINCLUDE)
 LIB_DIR = -L$(MKLPATH)
 LIB     = -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lifcore
