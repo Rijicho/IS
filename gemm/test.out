@@ -1,0 +1,6 @@
+matrix A:
+matrix B:
+matrix C:
+DGEMM-elapsed: 2.7849292755e-01
+matrix C:
+GEMM-elapsed: 2.0482784033e+01
