@@ -5,9 +5,9 @@
 #include <sys/time.h>
 #include "mkl.h"
 
-#define M 300
-#define N 400
-#define K 200
+#define M 3000
+#define N 4000
+#define K 2000
 
 // ----- matrix access ----- //
 // mat[i,j]
