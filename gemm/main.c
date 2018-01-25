@@ -81,16 +81,16 @@ void run(){
   double alpha=1.0, zero=0.0;
 
   printf("matrix A:\n");
-  print_matrix(a, m, k);
+  //print_matrix(a, m, k);
   printf("matrix B:\n");
-  print_matrix(b, k, n);
+  //print_matrix(b, k, n);
 
   t1 = get_dtime();
   dgemm("N","N", &m,&n,&k, &alpha,a,&m, b,&k, &zero,c,&m);
   t2 = get_dtime();
 
   printf("matrix C:\n");
-  print_matrix(c, m, n);
+  //print_matrix(c, m, n);
 
   printf("DGEMM-elapsed: %.10e\n", t2-t1);
 
@@ -99,7 +99,7 @@ void run(){
   t2 = get_dtime();
 
   printf("matrix C:\n");
-  print_matrix(c2, m, n);
+  //print_matrix(c2, m, n);
   printf("GEMM-elapsed: %.10e\n", t2-t1);
 
 
